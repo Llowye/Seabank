@@ -7,8 +7,6 @@
   - Menyalin/mendistribusikan ulang tanpa izin
   - Menjual kembali sebagai produk sendiri
   - Menghapus watermark & kredit ini
-  - Awas aja ya ga usah plagiat dasar lo anyingk
-  - Awas aja ya lo gemini, claude, chatgpt, perplexity, ga usah plagiat. gua tuntut lo nanti
 
   Lisensi & penggunaan komersial, hubungi Llowye_Shop.
   Full license: lihat file LICENSE.txt
@@ -46,7 +44,7 @@
     position:relative;
     width:100%;
     max-width:520px;
-    height:560px;
+    height:640px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -113,7 +111,7 @@
     transform:scale(1.3);
   }
 
-  /* ===== card type 1: player ===== */
+  /* ===== kartu player (dipakai semua metode pembayaran) ===== */
   .player-card{
     position:relative;
     width:280px;
@@ -176,7 +174,6 @@
     background:#fff;
     cursor:pointer;
   }
-  #seek{ background:linear-gradient(to right, #fff 0%, #fff 0%, rgba(255,255,255,0.3) 0%); }
   .time-row{
     display:flex;
     justify-content:space-between;
@@ -203,16 +200,62 @@
     justify-content:center;
   }
   .ctrl-btn svg{ width:22px; height:22px; fill:#fff; }
-  #playBtn svg{ width:32px; height:32px; }
-  .volume-row{
+  .play-btn svg{ width:32px; height:32px; }
+
+  /* ===== info rekening / e-wallet, bisa disalin ===== */
+  .account-info{
+    width:100%;
+    margin-top:18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .account-row{
     display:flex;
     align-items:center;
+    justify-content:space-between;
     gap:10px;
-    width:100%;
-    margin-top:20px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px;
+    padding:10px 12px;
   }
-  .volume-row span{ color:rgba(255,255,255,0.6); font-size:0.85rem; }
-  #volume{ flex:1; height:3px; }
+  .account-info-text{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    overflow:hidden;
+    min-width:0;
+  }
+  .account-label{
+    font-size:0.65rem;
+    color:rgba(255,255,255,0.5);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .account-value{
+    font-size:0.92rem;
+    color:#fff;
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .copy-btn{
+    flex-shrink:0;
+    background:#7c1f2e;
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-weight:800;
+    font-size:0.76rem;
+    cursor:pointer;
+    transition:transform 0.08s ease, background 0.2s ease;
+  }
+  .copy-btn:hover{ background:#5e1622; }
+  .copy-btn:active{ transform:scale(0.94); }
+  .copy-btn.copied{ background:#22c55e; }
 
   #ytHost{
     position:fixed;
@@ -222,153 +265,223 @@
     pointer-events:none;
     bottom:0; left:0;
   }
-
-  /* ===== card type 2: open-link (mixtape / newspaper) ===== */
-  .info-card{
-    width:280px;
-    border-radius:22px;
-    overflow:hidden;
-    box-shadow:0 25px 50px rgba(0,0,0,0.5);
-    border:1px solid rgba(255,255,255,0.12);
-    background:rgba(255,255,255,0.04);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-  }
-  .info-card .cover{
-    width:100%;
-    height:auto;
-    display:block;
-    pointer-events:none;
-    -webkit-user-drag:none;
-  }
-  .info-content{ padding:18px; }
-  .info-title{
-    color:#fff;
-    font-weight:700;
-    font-size:1.05rem;
-    margin-bottom:10px;
-  }
-  .song-list{
-    list-style:decimal inside;
-    color:rgba(255,255,255,0.85);
-    font-size:0.8rem;
-    line-height:1.65;
-    margin-bottom:16px;
-    padding-left:2px;
-  }
-  .open-btn{
-    display:block;
-    text-align:center;
-    background:#ff9ecb;
-    color:#fff;
-    padding:10px;
-    border-radius:10px;
-    font-weight:800;
-    font-size:0.9rem;
-    text-decoration:none;
-    box-shadow:0 4px 0 #e07aa8;
-    transition:transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease;
-  }
-  .open-btn:hover{ background:#ff7fb8; }
-  .open-btn:active{
-    transform:translateY(4px);
-    box-shadow:0 0px 0 #e07aa8;
-  }
- 
 </style>
 </head>
 
- <body>
+<body>
 
-  <h1>SEABANK</h1>
+  <h1>₊˚ ALL PAYMENT ˚⊹</h1>
 
   <div class="carousel-wrapper">
     <div class="nav-btn prev" id="carouselPrev">&#10094;</div>
 
     <div class="carousel-track" id="track">
 
-      <!-- CARD 1: player -->
-      <div class="carousel-card" data-index="0">
+      <!-- ================= CARD 1: SEABANK ================= -->
+      <!-- Ganti seabank.jpg, nama pemilik, no. rekening, dan VIDEO_ID sesuai punya kamu -->
+      <div class="carousel-card" data-index="0" data-video-id="zyLmavBAY7k">
         <div class="player-card">
           <div class="bg-blur" style="background-image:url('seabank.jpg')"></div>
           <div class="overlay-dark"></div>
           <div class="content">
-            <img class="art" src="seabank.jpg" alt="Teh Hijau - Tulus">
+            <img class="art" src="seabank.jpg" alt="SEABANK">
 
             <div class="track-info">
-              <div class="title">Teh Hijau</div>
-              <div class="artist">Tulus</div>
+              <div class="artist">Teh Hijau — Tulus</div>
             </div>
 
             <div class="progress-row">
-              <input type="range" id="seek" min="0" max="100" value="0">
+              <input type="range" class="seek" min="0" max="100" value="0">
             </div>
             <div class="time-row">
-              <span id="curTime">0:00</span>
-              <span id="totalTime">-0:00</span>
+              <span class="cur-time">0:00</span>
+              <span class="total-time">-0:00</span>
             </div>
 
             <div class="controls">
-              <button class="ctrl-btn" id="prevBtn" title="Ulang dari awal">
+              <button class="ctrl-btn prev-btn" title="Ulang dari awal">
                 <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
               </button>
-              <button class="ctrl-btn" id="playBtn" title="Play/Pause">
-                <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <button class="ctrl-btn play-btn" title="Play/Pause">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </button>
-              <button class="ctrl-btn" id="nextBtn" title="Lagu berikutnya" disabled style="opacity:0.35;">
+              <button class="ctrl-btn" disabled style="opacity:0.35;">
                 <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg>
               </button>
             </div>
 
+            <div class="account-info">
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">Atas Nama</span>
+                  <span class="account-value">Annisa Putri</span>
+                </div>
+              </div>
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">No. Rekening</span>
+                  <span class="account-value">901069237223</span>
+                </div>
+                <button class="copy-btn" data-copy="901069237223">Salin</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
 
-      <!-- CARD 2: GOPAY -->
-      <div class="carousel-card" data-index="1">
-        <div class="info-card">
-          <img class="cover" src="gopay.jpg" alt="Mixtape For You">
-          <div class="info-content">
-            <div class="info-title">GOPAY</div>
-            <ol class="song-list">
-              <li>Slow Motion — Matt Champion & JENNIE</li>
-              <li>Everywhere, Everything — Noah Kahan & Gracie Abrams</li>
-              <li>Teh Hijau — Tulus</li>
-              <li>Begged — Olivia Rodrigo</li>
-            </ol>
-            <a class="open-btn" href="https://mixtape-for-you.replit.app/m/06ok33nh" target="_blank" rel="noopener">OPEN</a>
+      <!-- ================= CARD 2: GOPAY ================= -->
+      <div class="carousel-card" data-index="1" data-video-id="zyLmavBAY7k">
+        <div class="player-card">
+          <div class="bg-blur" style="background-image:url('gopay.jpg')"></div>
+          <div class="overlay-dark"></div>
+          <div class="content">
+            <img class="art" src="gopay.jpg" alt="GOPAY">
+
+            <div class="track-info">
+              <div class="artist">Slow Motion — Matt Champion & JENNIE</div>
+            </div>
+
+            <div class="progress-row">
+              <input type="range" class="seek" min="0" max="100" value="0">
+            </div>
+            <div class="time-row">
+              <span class="cur-time">0:00</span>
+              <span class="total-time">-0:00</span>
+            </div>
+
+            <div class="controls">
+              <button class="ctrl-btn prev-btn" title="Ulang dari awal">
+                <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+              </button>
+              <button class="ctrl-btn play-btn" title="Play/Pause">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="ctrl-btn" disabled style="opacity:0.35;">
+                <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg>
+              </button>
+            </div>
+
+            <div class="account-info">
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">Atas Nama</span>
+                  <span class="account-value">Nenek Llowye</span>
+                </div>
+              </div>
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">No. GoPay</span>
+                  <span class="account-value">08991740111</span>
+                </div>
+                <button class="copy-btn" data-copy="08991740111">Salin</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
 
-      <!-- CARD 3: Sshopeepay -->
-      <div class="carousel-card" data-index="2">
-        <div class="info-card">
-          <img class="cover" src="shopee.jpeg" alt="List Song for U (っ˶ ˘ ᵕ˘)ˆᵕ ˆ˶ς)">
-          <div class="info-content">
-            <div class="info-title">SHOPEEPAY</div>
-            <ol class="song-list">
-              <li>Membasuh (feat. Rara Sekar) — Hindia</li>
-              <li>About You — The 1975</li>
-              <li>Got My Number — MONSTA X</li>
-            </ol>
-            <a class="open-btn" href="https://burn-cd.vercel.app/cd/MTQ4MTgwNDU4MSwxODUwMDE5MDM4LDE0OTAxODM0MDI" target="_blank" rel="noopener">OPEN</a>
+      <!-- ================= CARD 3: SHOPEEPAY ================= -->
+      <div class="carousel-card" data-index="2" data-video-id="zyLmavBAY7k">
+        <div class="player-card">
+          <div class="bg-blur" style="background-image:url('shopee.jpeg')"></div>
+          <div class="overlay-dark"></div>
+          <div class="content">
+            <img class="art" src="shopee.jpeg" alt="SHOPEEPAY">
+
+            <div class="track-info">
+              <div class="artist">Membasuh — Hindia (feat. Rara Sekar)</div>
+            </div>
+
+            <div class="progress-row">
+              <input type="range" class="seek" min="0" max="100" value="0">
+            </div>
+            <div class="time-row">
+              <span class="cur-time">0:00</span>
+              <span class="total-time">-0:00</span>
+            </div>
+
+            <div class="controls">
+              <button class="ctrl-btn prev-btn" title="Ulang dari awal">
+                <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+              </button>
+              <button class="ctrl-btn play-btn" title="Play/Pause">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="ctrl-btn" disabled style="opacity:0.35;">
+                <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg>
+              </button>
+            </div>
+
+            <div class="account-info">
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">Atas Nama</span>
+                  <span class="account-value">Annisa Putri</span>
+                </div>
+              </div>
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">No. ShopeePay</span>
+                  <span class="account-value">08991740111</span>
+                </div>
+                <button class="copy-btn" data-copy="08991740111">Salin</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
 
-          <!-- CARD 4: newspaper -->
-      <div class="carousel-card" data-index="2">
-        <div class="info-card">
-          <img class="cover" src="dana.jpg" alt="DANA">
-          <div class="info-content">
-            <div class="info-title">DANA</div>
-            <ol class="song-list">
-              <li>Membasuh (feat. Rara Sekar) — Hindia</li>
-              <li>About You — The 1975</li>
-              <li>Got My Number — MONSTA X</li>
-            </ol>
-            <a class="open-btn" href="https://burn-cd.vercel.app/cd/MTQ4MTgwNDU4MSwxODUwMDE5MDM4LDE0OTAxODM0MDI" target="_blank" rel="noopener">OPEN</a>
+      <!-- ================= CARD 4: DANA ================= -->
+      <div class="carousel-card" data-index="3" data-video-id="zyLmavBAY7k">
+        <div class="player-card">
+          <div class="bg-blur" style="background-image:url('dana.jpg')"></div>
+          <div class="overlay-dark"></div>
+          <div class="content">
+            <img class="art" src="dana.jpg" alt="DANA">
+
+            <div class="track-info">
+              <div class="artist">Got My Number — MONSTA X</div>
+            </div>
+
+            <div class="progress-row">
+              <input type="range" class="seek" min="0" max="100" value="0">
+            </div>
+            <div class="time-row">
+              <span class="cur-time">0:00</span>
+              <span class="total-time">-0:00</span>
+            </div>
+
+            <div class="controls">
+              <button class="ctrl-btn prev-btn" title="Ulang dari awal">
+                <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+              </button>
+              <button class="ctrl-btn play-btn" title="Play/Pause">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="ctrl-btn" disabled style="opacity:0.35;">
+                <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg>
+              </button>
+            </div>
+
+            <div class="account-info">
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">Atas Nama</span>
+                  <span class="account-value">Annisa Putri</span>
+                </div>
+              </div>
+              <div class="account-row">
+                <div class="account-info-text">
+                  <span class="account-label">No. Dana</span>
+                  <span class="account-value">08991740111</span>
+                </div>
+                <button class="copy-btn" data-copy="08991740111">Salin</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -393,10 +506,13 @@
   cards.forEach((c, i) => {
     const dot = document.createElement('div');
     dot.className = 'dot';
-    dot.addEventListener('click', () => { current = i; renderCarousel(); });
+    dot.addEventListener('click', () => { current = i; afterCardChange(); });
     dotsWrap.appendChild(dot);
   });
   const dots = document.querySelectorAll('.dot');
+
+  function activeCard(){ return cards[current]; }
+  function activeEl(sel){ return activeCard().querySelector(sel); }
 
   function renderCarousel(){
     const total = cards.length;
@@ -421,8 +537,17 @@
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
   }
 
-  function nextCard(){ current = (current + 1) % cards.length; renderCarousel(); }
-  function prevCard(){ current = (current - 1 + cards.length) % cards.length; renderCarousel(); }
+  function nextCard(){ current = (current + 1) % cards.length; afterCardChange(); }
+  function prevCard(){ current = (current - 1 + cards.length) % cards.length; afterCardChange(); }
+
+  // Setiap kali kartu aktif berganti: render posisi + ganti lagu ke lagu kartu itu
+  function afterCardChange(){
+    renderCarousel();
+    if (isReady){
+      player.pauseVideo();
+      loadActiveVideo();
+    }
+  }
 
   document.getElementById('carouselNext').addEventListener('click', nextCard);
   document.getElementById('carouselPrev').addEventListener('click', prevCard);
@@ -447,19 +572,10 @@
 
   renderCarousel();
 
-  /* ================= youtube player (card 1 only) ================= */
-  const VIDEO_ID = "zyLmavBAY7k"; // TULUS - Teh Hijau (Official Music Video)
-
+  /* ================= satu youtube player, dipakai bergantian per kartu ================= */
   let player;
   let isReady = false;
   let isSeeking = false;
-
-  const playBtn = document.getElementById('playBtn');
-  const playIcon = document.getElementById('playIcon');
-  const prevBtn = document.getElementById('prevBtn');
-  const seek = document.getElementById('seek');
-  const curTimeEl = document.getElementById('curTime');
-  const totalTimeEl = document.getElementById('totalTime');
 
   const ICON_PLAY = '<path d="M8 5v14l11-7z"/>';
   const ICON_PAUSE = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
@@ -473,8 +589,8 @@
 
   function onYouTubeIframeAPIReady(){
     player = new YT.Player('ytPlayer', {
-      height:'1', width:'1', videoId: VIDEO_ID,
-      playerVars:{ controls:0, disablekb:1, modestbranding:1, rel:0, start:15 },
+      height:'1', width:'1', videoId: cards[0].dataset.videoId,
+      playerVars:{ controls:0, disablekb:1, modestbranding:1, rel:0 },
       events:{ onReady:onPlayerReady, onStateChange:onPlayerStateChange }
     });
   }
@@ -483,70 +599,119 @@
   function onPlayerReady(){
     isReady = true;
     player.setVolume(70);
-    const dur = player.getDuration();
-    totalTimeEl.textContent = '-' + formatTime(dur);
+    updateDurationDisplay();
     updateLoop();
   }
 
+  function updateDurationDisplay(){
+    const totalTimeEl = activeEl('.total-time');
+    if(!totalTimeEl) return;
+    const dur = player.getDuration();
+    totalTimeEl.textContent = '-' + formatTime(dur || 0);
+  }
+
   function onPlayerStateChange(e){
-    if (e.data === YT.PlayerState.PLAYING){ playIcon.innerHTML = ICON_PAUSE; }
-    else { playIcon.innerHTML = ICON_PLAY; }
+    const icon = activeEl('.play-icon');
+    if (icon) icon.innerHTML = (e.data === YT.PlayerState.PLAYING) ? ICON_PAUSE : ICON_PLAY;
     if (e.data === YT.PlayerState.CUED || e.data === YT.PlayerState.UNSTARTED){
-      const dur = player.getDuration();
-      if (dur) totalTimeEl.textContent = '-' + formatTime(dur);
+      updateDurationDisplay();
     }
   }
 
-
-  playBtn.addEventListener('click', () => {
+  // ganti sumber lagu ke lagu milik kartu yang lagi aktif (tanpa auto-play)
+  function loadActiveVideo(){
     if (!isReady) return;
-    const state = player.getPlayerState();
-    if (state === YT.PlayerState.PLAYING){ player.pauseVideo(); }
-    else { player.playVideo(); }
-  });
-
-  prevBtn.addEventListener('click', () => { if (isReady) player.seekTo(0, true); });
-
-  seek.addEventListener('input', () => {
-    isSeeking = true;
-    seek.style.background = `linear-gradient(to right, #fff ${seek.value}%, rgba(255,255,255,0.3) ${seek.value}%)`;
-  });
-  seek.addEventListener('change', () => {
-    if (!isReady) { isSeeking = false; return; }
-    const dur = player.getDuration();
-    const target = (seek.value / 100) * dur;
-    player.seekTo(target, true);
-    isSeeking = false;
-  });
+    player.cueVideoById(activeCard().dataset.videoId);
+    const icon = activeEl('.play-icon');
+    if (icon) icon.innerHTML = ICON_PLAY;
+    const seekEl = activeEl('.seek');
+    if (seekEl){ seekEl.value = 0; seekEl.style.background = 'linear-gradient(to right, #fff 0%, rgba(255,255,255,0.3) 0%)'; }
+    const curTimeEl = activeEl('.cur-time');
+    if (curTimeEl) curTimeEl.textContent = '0:00';
+  }
 
   function updateLoop(){
     if (isReady && !isSeeking){
-      const cur = player.getCurrentTime() || 0;
-      const dur = player.getDuration() || 0;
-      const pct = dur ? (cur / dur) * 100 : 0;
-      seek.value = pct;
-      seek.style.background = `linear-gradient(to right, #fff ${pct}%, rgba(255,255,255,0.3) ${pct}%)`;
-      curTimeEl.textContent = formatTime(cur);
-      totalTimeEl.textContent = '-' + formatTime(Math.max(dur - cur, 0));
+      const seekEl = activeEl('.seek');
+      if (seekEl){
+        const cur = player.getCurrentTime() || 0;
+        const dur = player.getDuration() || 0;
+        const pct = dur ? (cur / dur) * 100 : 0;
+        seekEl.value = pct;
+        seekEl.style.background = `linear-gradient(to right, #fff ${pct}%, rgba(255,255,255,0.3) ${pct}%)`;
+        const curTimeEl = activeEl('.cur-time');
+        const totalTimeEl = activeEl('.total-time');
+        if (curTimeEl) curTimeEl.textContent = formatTime(cur);
+        if (totalTimeEl) totalTimeEl.textContent = '-' + formatTime(Math.max(dur - cur, 0));
+      }
     }
     requestAnimationFrame(updateLoop);
   }
- // bunyi klik pas tombol Open dipencet
+
+  /* ================= bunyi klik (kayak klik komputer) ================= */
   function playClickSound(){
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = 'square';
     osc.frequency.value = 800;
-    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
     osc.connect(gain);
     gain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 0.08);
   }
-  document.querySelectorAll('.open-btn').forEach(btn => {
-    btn.addEventListener('click', playClickSound);
+
+  /* ================= salin nomor rekening / e-wallet ================= */
+  function copyText(text, btn){
+    navigator.clipboard.writeText(text).then(() => {
+      playClickSound();
+      const original = btn.textContent;
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1200);
+    });
+  }
+
+  /* ================= semua klik tombol di dalam kartu aktif ================= */
+  document.addEventListener('click', (e) => {
+    const playBtn = e.target.closest('.play-btn');
+    if (playBtn && isReady){
+      const state = player.getPlayerState();
+      if (state === YT.PlayerState.PLAYING) player.pauseVideo();
+      else player.playVideo();
+      return;
+    }
+    const prevBtn = e.target.closest('.prev-btn');
+    if (prevBtn && isReady){
+      player.seekTo(0, true);
+      return;
+    }
+    const copyBtn = e.target.closest('.copy-btn');
+    if (copyBtn){
+      copyText(copyBtn.dataset.copy, copyBtn);
+      return;
+    }
+  });
+
+  document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('seek')){
+      isSeeking = true;
+      e.target.style.background = `linear-gradient(to right, #fff ${e.target.value}%, rgba(255,255,255,0.3) ${e.target.value}%)`;
+    }
+  });
+  document.addEventListener('change', (e) => {
+    if (e.target.classList.contains('seek')){
+      if (!isReady){ isSeeking = false; return; }
+      const dur = player.getDuration();
+      const target = (e.target.value / 100) * dur;
+      player.seekTo(target, true);
+      isSeeking = false;
+    }
   });
 </script>
 
