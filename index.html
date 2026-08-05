@@ -313,7 +313,7 @@
                   <span class="account-label">No. Rekening</span>
                   <span class="account-value">901069237223</span>
                 </div>
-                <button class="copy-btn" data-copy=901069237223">Salin</button>
+                <button class="copy-btn" data-copy="901069237223">Salin</button>
               </div>
             </div>
 
@@ -357,7 +357,7 @@
               <div class="account-row">
                 <div class="account-info-text">
                   <span class="account-label">Atas Nama</span>
-                  <span class="account-value">NENEK LLOWYE</span>
+                  <span class="account-value">Nenek Llowye</span>
                 </div>
               </div>
               <div class="account-row">
@@ -637,7 +637,7 @@
 
   /* ================= salin nomor rekening / e-wallet ================= */
   function copyText(text, btn){
-    navigator.clipboard.writeText(text).then(() => {
+    function showFeedback(){
       playClickSound();
       const original = btn.textContent;
       btn.textContent = 'Tersalin!';
@@ -646,7 +646,26 @@
         btn.textContent = original;
         btn.classList.remove('copied');
       }, 1200);
-    });
+    }
+
+    function fallbackCopy(){
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch(err) {}
+      document.body.removeChild(ta);
+      showFeedback();
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(showFeedback).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
   }
 
   /* ================= semua klik tombol di dalam kartu aktif ================= */
