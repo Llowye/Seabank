@@ -508,8 +508,12 @@
               <button class="ctrl-btn" disabled style="opacity:0.35;">
                 <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg>
               </button>
-            </div>         
+            </div>
 
+          </div>
+        </div>        
+      </div>
+      
     </div>
 
     <div class="nav-btn next" id="carouselNext">&#10095;</div>
@@ -648,8 +652,6 @@
     if (seekEl){ seekEl.value = 0; seekEl.style.background = 'linear-gradient(to right, #fff 0%, rgba(255,255,255,0.3) 0%)'; }
     const curTimeEl = activeEl('.cur-time');
     if (curTimeEl) curTimeEl.textContent = '0:00';
-    const totalTimeEl = activeEl('.total-time');
-    if (totalTimeEl) totalTimeEl.textContent = '-0:00';
   }
 
   /* ================= bunyi klik (kayak klik komputer) ================= */
